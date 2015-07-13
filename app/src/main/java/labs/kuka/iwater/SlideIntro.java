@@ -1,6 +1,5 @@
 package labs.kuka.iwater;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,10 +8,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import labs.kuka.iwater.ui.ViewPagerAdapter;
+import labs.kuka.iwater.ui.WizardFragment;
+
+import static android.widget.Toast.makeText;
 
 public class SlideIntro extends FragmentActivity {
 
@@ -20,6 +24,7 @@ public class SlideIntro extends FragmentActivity {
     private View indicator1;
     private View indicator2;
     private View indicator3;
+    private TextView txtViewSkip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,31 +41,14 @@ public class SlideIntro extends FragmentActivity {
         viewPager.setOnPageChangeListener(new WizardPageChangeListener());
         updateIndicators(0);
 
+        txtViewSkip = (TextView) findViewById(R.id.txt_view_skip);
 
-    }
-
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private int WIZARD_PAGES_COUNT = 3;
-
-        public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            final WizardFragment wizardFragment = new WizardFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(WizardFragment.PAGE_POSITION, position);
-            wizardFragment.setArguments(bundle);
-            return wizardFragment;
-        }
-
-        @Override
-        public int getCount() {
-            return WIZARD_PAGES_COUNT;
-        }
-
+        txtViewSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SlideIntro.this, "test skip button", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -93,7 +81,6 @@ public class SlideIntro extends FragmentActivity {
         public void onPageScrollStateChanged(int state) {
 
         }
-
     }
 
     public void updateIndicators(int position) {

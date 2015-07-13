@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">IWater</string>
+    <string name="app_name">99 Water</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="skip">pular</string>
+
 </resources>

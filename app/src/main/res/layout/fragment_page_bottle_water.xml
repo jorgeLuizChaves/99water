@@ -9,5 +9,5 @@
         android:id="@+id/icon_androidsrc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/galao" />
+        android:src="@drawable/water_bottle" />
 </RelativeLayout>

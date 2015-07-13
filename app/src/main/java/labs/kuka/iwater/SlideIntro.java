@@ -1,10 +1,7 @@
 package labs.kuka.iwater;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -13,22 +10,25 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import labs.kuka.iwater.ui.UpdateIndicatorUI;
 import labs.kuka.iwater.ui.ViewPagerAdapter;
-import labs.kuka.iwater.ui.WizardFragment;
-
-import static android.widget.Toast.makeText;
+import labs.kuka.iwater.ui.WizardFlow;
+import labs.kuka.iwater.ui.WizardFlowPage;
 
 public class SlideIntro extends FragmentActivity {
 
+    private static final int FIRST_PAGE = 0;
     private ViewPager viewPager;
     private View indicator1;
     private View indicator2;
     private View indicator3;
     private TextView txtViewSkip;
+    private UpdateIndicatorUI indicatorUI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        indicatorUI = new UpdateIndicatorUI(this);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_slide_intro);
 
@@ -38,8 +38,8 @@ public class SlideIntro extends FragmentActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
-        viewPager.setOnPageChangeListener(new WizardPageChangeListener());
-        updateIndicators(0);
+        viewPager.addOnPageChangeListener(new WizardPageChangeListener());
+        updateIndicators(FIRST_PAGE);
 
         txtViewSkip = (TextView) findViewById(R.id.txt_view_skip);
 
@@ -49,6 +49,8 @@ public class SlideIntro extends FragmentActivity {
                 Toast.makeText(SlideIntro.this, "test skip button", Toast.LENGTH_LONG).show();
             }
         });
+
+
     }
 
     @Override
@@ -84,72 +86,7 @@ public class SlideIntro extends FragmentActivity {
     }
 
     public void updateIndicators(int position) {
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int resizeValue = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, 25, metrics);
-        int defaultValue = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, 15, metrics);
-        switch (position) {
-            case 0:
-                indicator1.getLayoutParams().height = resizeValue;
-                indicator1.getLayoutParams().width = resizeValue;
-                indicator1.requestLayout();
-
-                indicator2.getLayoutParams().height = defaultValue;
-                indicator2.getLayoutParams().width = defaultValue;
-                indicator2.requestLayout();
-
-                indicator3.getLayoutParams().height = defaultValue;
-                indicator3.getLayoutParams().width = defaultValue;
-                indicator3.requestLayout();
-
-                break;
-
-            case 1:
-                indicator1.getLayoutParams().height = defaultValue;
-                indicator1.getLayoutParams().width = defaultValue;
-                indicator1.requestLayout();
-
-                indicator2.getLayoutParams().height = resizeValue;
-                indicator2.getLayoutParams().width = resizeValue;
-                indicator2.requestLayout();
-
-                indicator3.getLayoutParams().height = defaultValue;
-                indicator3.getLayoutParams().width = defaultValue;
-                indicator3.requestLayout();
-
-                break;
-
-            case 2:
-                indicator1.getLayoutParams().height = defaultValue;
-                indicator1.getLayoutParams().width = defaultValue;
-                indicator1.requestLayout();
-
-                indicator2.getLayoutParams().height = defaultValue;
-                indicator2.getLayoutParams().width = defaultValue;
-                indicator2.requestLayout();
-
-                indicator3.getLayoutParams().height = resizeValue;
-                indicator3.getLayoutParams().width = resizeValue;
-                indicator3.requestLayout();
-
-                break;
-
-            case 3:
-                indicator1.getLayoutParams().height = defaultValue;
-                indicator1.getLayoutParams().width = defaultValue;
-                indicator1.requestLayout();
-
-                indicator2.getLayoutParams().height = defaultValue;
-                indicator2.getLayoutParams().width = defaultValue;
-                indicator2.requestLayout();
-
-                indicator3.getLayoutParams().height = defaultValue;
-                indicator3.getLayoutParams().width = defaultValue;
-                indicator3.requestLayout();
-
-                break;
-        }
-
+        final WizardFlowPage wizardFlowPage = WizardFlow.getWizardFlowPage(this, position);
+        wizardFlowPage.updateViewPages(indicator1, indicator2, indicator3);
     }
 }

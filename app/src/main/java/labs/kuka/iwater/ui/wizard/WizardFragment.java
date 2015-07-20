@@ -1,4 +1,4 @@
-package labs.kuka.iwater.ui;
+package labs.kuka.iwater.ui.wizard;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import labs.kuka.iwater.R;
+import labs.kuka.iwater.ui.wizard.WizardFlow;
 
 /**
  * Created by Jorge on 7/11/15.
@@ -21,23 +21,12 @@ public class WizardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        int layout_id = R.layout.fragment_page_bottle_water;
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         final Bundle arguments = getArguments();
         final Integer pgPosition = arguments.getInt(PAGE_POSITION);
-        switch (pgPosition) {
-            case 0:
-                layout_id = R.layout.fragment_page_bottle_water;
-                break;
-
-            case 1:
-                layout_id = R.layout.fragment_page_drinkable_water;
-                break;
-
-            case 2:
-                layout_id = R.layout.fragment_page_boy_drinking;
-                break;
-        }
+        final WizardFlow wizardFlowByPageNumber = WizardFlow.getWizardFlowByPageNumber(pgPosition);
+        int layout_id = wizardFlowByPageNumber.getLayoutId();
         return inflater.inflate(layout_id, container, false);
     }
 }

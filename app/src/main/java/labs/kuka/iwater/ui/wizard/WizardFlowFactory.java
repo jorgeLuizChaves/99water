@@ -1,4 +1,4 @@
-package labs.kuka.iwater.ui;
+package labs.kuka.iwater.ui.wizard;
 
 import android.app.Activity;
 

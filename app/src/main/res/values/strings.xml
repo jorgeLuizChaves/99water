@@ -3,5 +3,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="skip">pular</string>
+    <string name="google_map_api_key">AIzaSyDvJfjvDvcGVGt-j9OLe6_nPfqR3i8tgK4</string>
 
 </resources>

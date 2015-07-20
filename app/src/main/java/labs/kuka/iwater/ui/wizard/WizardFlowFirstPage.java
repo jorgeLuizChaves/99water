@@ -1,7 +1,6 @@
-package labs.kuka.iwater.ui;
+package labs.kuka.iwater.ui.wizard;
 
 import android.app.Activity;
-import android.view.View;
 
 /**
  * Created by Jorge on 7/13/15.

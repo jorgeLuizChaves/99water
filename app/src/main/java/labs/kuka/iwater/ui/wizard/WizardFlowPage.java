@@ -1,11 +1,9 @@
-package labs.kuka.iwater.ui;
+package labs.kuka.iwater.ui.wizard;
 
 import android.app.Activity;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import labs.kuka.iwater.ui.UpdateIndicatorUI;
 
 /**
  * Created by Jorge on 7/13/15.

@@ -1,21 +1,19 @@
 package labs.kuka.iwater;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import labs.kuka.iwater.ui.UpdateIndicatorUI;
 import labs.kuka.iwater.ui.ViewPagerAdapter;
-import labs.kuka.iwater.ui.WizardFlow;
-import labs.kuka.iwater.ui.WizardFlowPage;
+import labs.kuka.iwater.ui.wizard.WizardFlow;
+import labs.kuka.iwater.ui.wizard.WizardFlowPage;
 
-public class SlideIntro extends FragmentActivity {
+public class SlideIntroActivity extends FragmentActivity {
 
     private static final int FIRST_PAGE = 0;
     private ViewPager viewPager;
@@ -46,11 +44,9 @@ public class SlideIntro extends FragmentActivity {
         txtViewSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SlideIntro.this, "test skip button", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SlideIntroActivity.this, HomeActivity.class));
             }
         });
-
-
     }
 
     @Override

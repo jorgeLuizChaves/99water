@@ -5,12 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import labs.kuka.iwater.ui.wizard.WizardFlow;
+import labs.kuka.iwater.ui.wizard.WizardFragment;
+
 /**
  * Created by Jorge on 7/13/15.
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-
-    private int WIZARD_PAGES_COUNT = 3;
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -27,7 +28,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return WIZARD_PAGES_COUNT;
+        return WizardFlow.values().length;
     }
 
 }
